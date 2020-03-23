@@ -1,0 +1,85 @@
+// You need underscore on the scss for it to not compile.
+@import "variables";
+@import "functions";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $gradient;
+  font-family: $font-stack;
+}
+
+// Det är set-text-color -> Det inom parantesen som säger vilken färg textvalet skall förhålla sig till.
+// Du kan alltså ha en annan bakgrund, men syftet är ju att förhålla sig till bakgrunden.
+header {
+  background: $dark-color;
+  color: set-text-color($dark-color);
+  // color: $secondary-color;
+  padding: 1rem;
+  h1 {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+.section {
+  padding: 3rem;
+  h3 {
+    font-size: 2rem;
+  }
+
+  &-a {
+    background: $primary-color;
+    color: #fff;
+  }
+  &-b {
+    background: $secondary-color;
+    color: #fff;
+  }
+}
+
+// a {
+//     color: #333;
+//     &:hover {
+//         color: coral;
+//     }
+// }
+
+%btn-shared {
+  display: inline-block;
+  padding: 0.7rem 2rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+// EXTENDING AND USING THE BUTTON SHARED!
+
+.btn {
+  &-light {
+    @extend %btn-shared;
+    background: $light-color;
+    color: #333;
+
+    &:hover {
+      @include transform(rotate(20deg));
+      background: darken($light-color, 10%);
+    }
+  }
+
+  &-dark {
+    @extend %btn-shared;
+    background: $dark-color;
+    color: #fff;
+
+    &:hover {
+      @include transform(rotate(-20deg));
+      background: lighten($dark-color, 10%);
+    }
+  }
+}
